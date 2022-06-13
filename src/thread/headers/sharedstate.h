@@ -54,6 +54,7 @@ struct GlobalIBO;
 struct Config;
 struct Vec2i;
 struct SharedMidiState;
+class OtherViewMessager;
 
 struct SharedState
 {
@@ -77,6 +78,7 @@ struct SharedState
 
 	Oneshot &oneshot() const;
 
+	OtherViewMessager &otherView() const;
 	
 #ifdef STEAM
 	Steam &steam() const;

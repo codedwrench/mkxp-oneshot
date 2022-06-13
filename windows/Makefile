@@ -83,6 +83,35 @@ $(DOWNLOADS)/ruby/configure: $(DOWNLOADS)/ruby/*.c
 $(DOWNLOADS)/ruby/*.c:
 	$(CLONE) $(GITHUB)/ruby/ruby $(DOWNLOADS)/ruby -b ruby_$(RUBY_BRANCH);
 
+libzmq: init_dirs $(LIBDIR)/libzmq.dll
+
+$(LIBDIR)/libzmq.dll: $(DOWNLOADS)/libzmq/Makefile
+	cd $(DOWNLOADS)/libzmq; \
+	make -j$(NPROC); make install
+
+$(DOWNLOADS)/libzmq/Makefile: $(DOWNLOADS)/libzmq/configure
+	cd $(DOWNLOADS)/libzmq; \
+	$(CONFIGURE)
+
+$(DOWNLOADS)/libzmq/configure: $(DOWNLOADS)/libzmq/autogen.sh
+	cd $(DOWNLOADS)/libzmq; ./autogen.sh
+
+$(DOWNLOADS)/libzmq/autogen.sh:
+	$(CLONE) $(GITHUB)/zeromq/libzmq $(DOWNLOADS)/libzmq
+
+zmqpp: init_dirs libzmq $(LIBDIR)/libzmqpp.dll
+
+$(LIBDIR)/libzmqpp.dll: ${DOWNLOADS}/zmqpp/cmakebuild/Makefile
+	cd ${DOWNLOADS}/zmqpp/cmakebuild; \
+	make -j${NPROC}; make install
+
+$(DOWNLOADS)/zmqpp/cmakebuild/Makefile: $(DOWNLOADS)/zmqpp/CMakeLists.txt
+	cd $(DOWNLOADS)/zmqpp; mkdir -p cmakebuild; cd cmakebuild; \
+	$(CMAKE)
+
+$(DOWNLOADS)/zmqpp/CMakeLists.txt:
+	$(CLONE) $(GITHUB)/somedevfox/zmqpp $(DOWNLOADS)/zmqpp
+
 libnsgif: init_dirs ${LIBDIR}/libnsgif.dll
 
 $(LIBDIR)/libnsgif.dll: $(DOWNLOADS)/libnsgif/Makefile
@@ -108,5 +137,5 @@ powerwash: clean-downloads
 clean-downloads:
 	-rm -rf downloads
 
-deps-core: sdlsound libnsgif
+deps-core: sdlsound libzmq zmqpp libnsgif
 everything: deps-core ruby
