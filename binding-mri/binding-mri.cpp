@@ -32,8 +32,6 @@
 #include "boost-hash.h"
 #include "version.h"
 
-#include "otherview-message.h"
-
 #ifdef __WIN32
 #include "binding-mri-win32.h"
 #endif
@@ -91,7 +89,6 @@ void oneshotBindingInit();
 void modshotBindingInit();
 void steamBindingInit();
 void aleffectBindingInit();
-void otherviewBindingInit();
 void screenBindingInit();
 void systemBindingInit();
 RB_METHOD(mriPrint);
@@ -131,7 +128,6 @@ static void mriBindingInit()
 	modshotBindingInit();
 	steamBindingInit();
 	aleffectBindingInit();
-	otherviewBindingInit();
 	screenBindingInit();
 	systemBindingInit();
 	rb_define_global_const("MODSHOT_VERSION", rb_str_new_cstr(MODSHOT_VERSION));
@@ -457,7 +453,6 @@ static void runRMXPScripts(BacktraceData &btData)
 
 	/* Set the debug flag */
 	rb_gv_set("$debug", conf.debugMode ? Qtrue : Qfalse);
-	rb_gv_set("$otherview", conf.isOtherView ? Qtrue : Qfalse);
 
 	rb_gv_set("$RGSS_SCRIPTS", scriptArray);
 

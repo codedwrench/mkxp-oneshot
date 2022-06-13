@@ -1,8 +1,7 @@
-# OSFM-Core-Public
-[![Build ModShot Ubuntu](https://github.com/Speak2Erase/OSFM-Core-Public/actions/workflows/build-ubuntu.yml/badge.svg)](https://github.com/Speak2Erase/OSFM-Core-Public/actions/workflows/build-ubuntu.yml)[![Build ModShot Windows](https://github.com/Speak2Erase/OSFM-Core-Public/actions/workflows/build-windows.yml/badge.svg)](https://github.com/Speak2Erase/OSFM-Core-Public/actions/workflows/build-windows.yml)
----
+# ModShot-Core
+[![Build ModShot Ubuntu ](https://github.com/Astrabit-ST/ModShot-Core/actions/workflows/build-ubuntu.yml/badge.svg)](https://github.com/Astrabit-ST/ModShot-Core/actions/workflows/build-ubuntu.yml)[![Build ModShot Windows](https://github.com/Astrabit-ST/ModShot-Core/actions/workflows/build-windows.yml/badge.svg)](https://github.com/Astrabit-ST/ModShot-Core/actions/workflows/build-windows.yml)
 
-This is a even more MORE specialized fork of a specialized fork of [OSFM-Public-Core by Speak2Erase](https://github.com/Speak2Erase/OSFM-Core-Public) ([mkxp by Ancurio](https://github.com/Ancurio/mkxp) designed for [*OneShot*](http://oneshot-game.com/)) for OneShot mods.
+This is a even more MORE specialized fork of a specialized fork of ([mkxp by Ancurio](https://github.com/Ancurio/mkxp) designed for [*OneShot*](http://oneshot-game.com/)) for OneShot mods.
 
 Thanks to [hunternet93](https://github.com/hunternet93) for starting the reimplementation of the journal program!
 

@@ -40,7 +40,6 @@
 #include "quad.h"
 #include "binding.h"
 #include "exception.h"
-#include "otherview-message.h"
 
 #ifndef _MSC_VER
 #include <unistd.h>
@@ -94,8 +93,6 @@ struct SharedStatePrivate
 
 	unsigned int stampCounter;
 
-	OtherViewMessager otherView;
-
 	SharedStatePrivate(RGSSThreadData *threadData)
 	    : bindingData(0),
 	      sdlWindow(threadData->window),
@@ -109,8 +106,7 @@ struct SharedStatePrivate
 	      oneshot(*threadData),
 	      _glState(threadData->config),
 	      fontState(threadData->config),
-	      stampCounter(0),
-		  otherView(threadData->config)
+	      stampCounter(0)
 	{
 		/* Shaders have been compiled in ShaderSet's constructor */
 		if (gl.ReleaseShaderCompiler)
@@ -218,7 +214,6 @@ GSATT(ShaderSet&, shaders)
 GSATT(TexPool&, texPool)
 GSATT(Quad&, gpQuad)
 GSATT(SharedFontState&, fontState)
-GSATT(OtherViewMessager&, otherView)
 
 void SharedState::setBindingData(void *data)
 {

@@ -97,7 +97,6 @@ void Config::read(int argc, char *argv[])
 	PO_DESC(SE.sourceCount, int, 6) \
 	PO_DESC(audioChannels, int, 30) \
 	PO_DESC(pathCache, bool, true) \
-	PO_DESC(isOtherView, bool, false) \
 	PO_DESC(mjitEnabled, bool, false) \
 	PO_DESC(mjitVerbosity, int, 0) \
 	PO_DESC(mjitMaxCache, int, 100) \
@@ -192,7 +191,7 @@ void Config::read(int argc, char *argv[])
 
 	SE.sourceCount = clamp(SE.sourceCount, 1, 64);
 
-	commonDataPath = prefPath(".", "OSFM");
+	commonDataPath = prefPath(".", "OneShot");
 
 	//Hardcode some ini/version settings
 	rgssVersion = 1;
