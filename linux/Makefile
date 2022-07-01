@@ -16,6 +16,7 @@ PKG_CONFIG_LIBDIR := $(BUILD_PREFIX)/lib/pkgconfig
 GIT := git
 CLONE := $(GIT) clone -q
 GITHUB := https://github.com
+BASE_RUBY_PATH := /usr/bin/ruby
 
 CONFIGURE_ENV := \
 	PKG_CONFIG_LIBDIR=$(PKG_CONFIG_LIBDIR) \
@@ -30,6 +31,7 @@ CMAKE_ARGS := \
 RUBY_CONFIGURE_ARGS := \
 	--disable-install-doc \
 	--enable-shared 
+	--with-baseruby=$(BASE_RUBY_PATH)
 
 CONFIGURE := $(CONFIGURE_ENV) ./configure $(CONFIGURE_ARGS)
 AUTOGEN   := $(CONFIGURE_ENV) ./autogen.sh $(CONFIGURE_ARGS)
