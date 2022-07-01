@@ -88,6 +88,8 @@ executable(exe_name,
     objc_args: global_args,
     objcpp_args: global_args,
     win_subsystem: 'windows',
+    build_rpath: 'lib',
+    install_rpath: 'lib',
     install: (host_system != 'windows')
 )
 
