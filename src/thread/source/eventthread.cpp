@@ -198,16 +198,7 @@ void EventThread::process(RGSSThreadData &rtData)
 
 	while (true)
 	{
-		#ifdef _WIN32
 		SDL_WaitEvent(&event);
-		#elif __linux__
-		if (!SDL_WaitEvent(&event))
-		{
-			Debug() << "EventThread: Event error";
-			Debug() << SDL_GetError();
-			break;
-		}
-		#endif
 
 		if (sMenu && sMenu->onEvent(event, joysticks))
 		{
