@@ -8,6 +8,16 @@
 #include <SDL2/SDL.h>
 #include <boost/crc.hpp>
 
+#ifdef _WIN32
+#define findWindow \
+	HWND hWnd = FindWindowA("journal", NULL); \
+	if(hWnd == NULL) \
+	{ \
+		std::cout << "[WARNING] Windows API's FindWindowA failed with following error: " << GetLastError() << std::endl; \
+		return Qnil; \
+	}
+#endif
+
 RB_METHOD(oneshotSetYesNo)
 {
 	RB_UNUSED_PARAM;
@@ -101,6 +111,34 @@ RB_METHOD(oneshotCRC32)
 	return UINT2NUM(result.checksum());
 }
 
+/*
+* Invading other process's memory, my favourite!
+*          - n
+*/ 
+VALUE getJournalPosition(int argc, VALUE* argv, VALUE self)
+{
+	int x = 0;
+	int y = 0;
+
+	#ifdef _WIN32
+	findWindow
+
+	RECT rect = {NULL};
+	if(GetWindowRect(hWnd, &rect))
+	{
+		x = rect.left;
+		y = rect.top;
+	} else 
+	{
+		std::cout << "[WARNING] Windows API's GetWindowRect failed with following error: " << GetLastError() << std::endl;
+		return Qnil;
+	}
+	#endif
+
+	return rb_ary_new3(2, INT2NUM(x), INT2NUM(y));
+}
+
+
 void oneshotBindingInit()
 {
 	VALUE module = rb_define_module("Oneshot");
@@ -132,4 +170,5 @@ void oneshotBindingInit()
 	_rb_define_module_function(module, "exiting", oneshotExiting);
 	_rb_define_module_function(module, "shake", oneshotShake);
 	_rb_define_module_function(module, "crc32", oneshotCRC32);
+	_rb_define_module_function(module, "journal_position", getJournalPosition);
 }
