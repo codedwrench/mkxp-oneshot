@@ -138,6 +138,18 @@ VALUE getJournalPosition(int argc, VALUE* argv, VALUE self)
 	return rb_ary_new3(2, INT2NUM(x), INT2NUM(y));
 }
 
+VALUE isJournalRunning(int argc, VALUE *argv, VALUE self)
+{
+	RB_UNUSED_PARAM;
+	#ifdef _WIN32
+	HWND journal = FindWindowA("journal", NULL);
+	if(journal == NULL)
+		return Qfalse;
+	#endif
+
+	return Qtrue;
+}
+
 
 void oneshotBindingInit()
 {
@@ -171,4 +183,5 @@ void oneshotBindingInit()
 	_rb_define_module_function(module, "shake", oneshotShake);
 	_rb_define_module_function(module, "crc32", oneshotCRC32);
 	_rb_define_module_function(module, "journal_position", getJournalPosition);
+	_rb_define_module_function(module, "journal_running?", isJournalRunning);
 }
