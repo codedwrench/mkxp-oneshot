@@ -150,6 +150,24 @@ VALUE isJournalRunning(int argc, VALUE *argv, VALUE self)
 	return Qtrue;
 }
 
+VALUE setJournalPosition(int argc, VALUE *argv, VALUE self)
+{
+	RB_UNUSED_PARAM;
+	int x, y;
+	rb_get_args(argc, argv, "ii", &x, &y RB_ARG_END);
+	#ifdef _WIN32
+	findWindow
+	SetWindowPos(
+		hWnd, 
+		NULL,
+		x, y, 
+		NULL, 
+		NULL, 
+		SWP_NOSIZE | SWP_NOZORDER
+	);
+	#endif
+	return Qnil;
+}
 
 void oneshotBindingInit()
 {
@@ -184,4 +202,5 @@ void oneshotBindingInit()
 	_rb_define_module_function(module, "crc32", oneshotCRC32);
 	_rb_define_module_function(module, "journal_position", getJournalPosition);
 	_rb_define_module_function(module, "journal_running?", isJournalRunning);
+	_rb_define_module_function(module, "set_journal_position", setJournalPosition);
 }
