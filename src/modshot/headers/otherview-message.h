@@ -19,6 +19,7 @@ class OtherViewMessager {
     zmqpp::socket *normal_socket;
 public:
     OtherViewMessager(const Config &c);
+    ~OtherViewMessager();
     bool sendMsg(const char* message);
     std::string getMsg();
     void close();

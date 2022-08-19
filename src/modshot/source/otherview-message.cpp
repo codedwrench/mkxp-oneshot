@@ -34,6 +34,11 @@ OtherViewMessager::OtherViewMessager(const Config &c):
     }
 }
 
+OtherViewMessager::~OtherViewMessager()
+{
+    this->close();
+}
+
 bool OtherViewMessager::sendMsg(const char* string)
 {
     zmqpp::message message;
@@ -44,9 +49,6 @@ bool OtherViewMessager::sendMsg(const char* string)
     } else {
         ret = normal_socket->send(message, true);
     }
-    //Debug() << "Sent message: ";
-    //Debug() << string;
-    //Debug() << ret;
 
     return ret;
 }
@@ -78,6 +80,6 @@ void OtherViewMessager::close()
     otherview_socket->close();
     normal_socket->close();
     Debug() << "Deleting sockets";
-    delete(otherview_socket);
-    delete(normal_socket);
+    delete otherview_socket;
+    delete normal_socket;
 }
